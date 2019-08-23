@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
+  <div class="container" ref="box">
     <!-- 卡片 element-ui 组件 -->
     <el-card class="my-card">
       <img src="../../assets/images/logo_index.png" alt />
-      <el-form v:model="loginForm">
-        <el-form-item>
+      <el-form :model="loginForm" status-icon :rules="loginRules" ref="loginform">
+        <el-form-item prop="mobile">
           <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="code">
           <el-input
             v-model="loginForm.code"
             placeholder="请输入验证码"
@@ -19,7 +19,7 @@
           <el-checkbox :value="true">我已阅读并同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width:100%">登 录</el-button>
+          <el-button type="primary" style="width:100%" @click="login">登 录</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -29,12 +29,50 @@
 <script>
 export default {
   data () {
+    const checkmobile = (rule, value, callback) => {
+      if (!/^1[3-9]\d{9}$/.test(value)) {
+        return callback(new Error('手机号码不正确'))
+      }
+      callback()
+    }
     return {
+      // 表单数据对象
       loginForm: {
         mobile: '',
         code: ''
+      },
+      //   表单校验规则对象
+      loginRules: {
+        mobile: [
+          // 每个校验对象都有可能有多条校验规则,所以是数组
+          { required: true, message: '请输入手机号', trigger: 'blur' },
+          { validator: checkmobile, trigger: 'change' } // 变输入的时候边变化
+
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' },
+          // 验证码是6位
+          { len: 6, message: '验证要6位', trigger: 'blur' }
+        ]
       }
 
+    }
+  },
+  methods: {
+    login () {
+      // this.$refs.loginform是当前组件的实例对象
+      this.$refs.loginform.validate((valid) => {
+        if (valid) {
+          this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+            .then(res => {
+              // 如果请求成功就跳转到首页
+              this.$router.push('/')
+            })
+            .catch(() => {
+              this.$message.error('手机号或者验证码不正确')
+            })
+        }
+      })
     }
   }
 }

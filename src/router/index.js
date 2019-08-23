@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router' // 导入路由模块
+import axios from 'axios' // 引入axios
 
 import Login from '@/views/login'
 Vue.use(VueRouter) // 注册所有的路由组件
-
+Vue.prototype.$http = axios // 配置axios为vue的原型
 // 使用实例化router对象
 const router = new VueRouter({
   routes: [
