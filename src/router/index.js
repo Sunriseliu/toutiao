@@ -10,6 +10,7 @@ import Home from '@/views/home' // 引入home 中vue
 import Welcome from '@/views/welcome'
 
 import notFound from '@/views/404'
+import store from '@/store'
 
 Vue.use(VueRouter) // 注册所有的路由组件
 Vue.prototype.$http = axios // 配置axios为vue的原型
@@ -28,6 +29,16 @@ const router = new VueRouter({
     // 设置路由 * 配配符, 这样如果跳入没有业务逻辑的路由地址,会跳转到404路由
     { path: '*', name: '404', component: notFound }
   ]
+})
+router.beforeEach((to, from, next) => {
+  // 如果是到登录页面就直接放行
+  // if (to.path === '/login') return next()
+  // // 如果没有登录过,没有sessionstorage就登录
+  // if (!store.getUser().token) return next('/login')
+  // // 其他的状态都放行
+  // next()
+  if (to.path !== '/login' && !store.getUser().token) return next('/login')
+  next()
 })
 
 // 导出路由对象

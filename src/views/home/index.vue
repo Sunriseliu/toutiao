@@ -5,7 +5,7 @@
       <el-menu
         default-active="/"
         class="el-menu-vertical-demo"
-        background-color="#545c64"
+        background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
 
@@ -50,8 +50,8 @@
         <span class="titile">江苏传智播客科技教育有限公司</span>
         <el-dropdown class="my-dropdown">
           <span class="el-dropdown-link">
-            <img class="user" src="../../assets/images/avatar.jpg" alt />
-            <span class="username">用户名</span>
+            <img class="user" src="../../assets/images/ironman2.jpg" alt />
+            <span class="username">  傲娇史塔克</span>
 
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
@@ -121,6 +121,7 @@ export default {
   }
   .el-aside {
     background: #002033;
+
     .logo{
       width: 100%;
       height: 60px;
@@ -129,6 +130,9 @@ export default {
      .minilogo {
       background-image: url(../../assets/images/logo_admin_01.png);
       background-size: 36px auto;
+    }
+    .el-menu{
+      border-right: none;
     }
   }
 }
