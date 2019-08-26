@@ -9,7 +9,7 @@ export default {
     // 保存这个字符串到sessionstorage
     window.sessionStorage.setItem(Key, jsonstr)
   },
-  // 获取用户信息
+  // 获取用户信息`
   getUser () {
     // jonstr是一个布尔值,如果有session就是true 如果没有session 就是空对象
     const jsonstr = window.sessionStorage.getItem(Key) || '{}'
@@ -17,7 +17,7 @@ export default {
   },
   // 删除用户信息
   delUser () {
-    window.sessionStorage.removeItem()
+    window.sessionStorage.removeItem(Key)
   }
 
 }

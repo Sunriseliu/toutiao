@@ -50,14 +50,15 @@
         <span class="titile">江苏传智播客科技教育有限公司</span>
         <el-dropdown class="my-dropdown">
           <span class="el-dropdown-link">
-            <img class="user" src="../../assets/images/ironman2.jpg" alt />
-            <span class="username">  傲娇史塔克</span>
+            <img class="user" :src="photo" alt />
+            <span class="username">  {{name}}</span>
 
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" @click.native = "setting()">个人设置</el-dropdown-item>
+            <!-- 绑定点击删除事件@click.native 是在组件中绑定原生事件的办法 -->
+            <el-dropdown-item icon="el-icon-unlock" @click.native= "logout()">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -69,17 +70,34 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     return {
       // 用来控制是否折叠
-      iszd: false
+      iszd: false,
+      name: '',
+      photo: ''
+
     }
   },
   methods: {
     toggleaside () {
       this.iszd = !this.iszd
+    },
+    logout () {
+      store.delUser()
+      this.$router.push('/login')
+    },
+    setting () {
+      this.$router.push('/setting')
     }
+
+  },
+  mounted () {
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
   }
 
 }

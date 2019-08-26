@@ -62,22 +62,32 @@ export default {
   methods: {
     login () {
       // this.$refs.loginform是当前组件的实例对象
-      this.$refs.loginform.validate((valid) => {
+      this.$refs.loginform.validate(async (valid) => {
         if (valid) {
-          this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
-            .then(res => {
-              // 成功 跳转
-              // 注意 登录 不够完善
-              // res是响应对象--->res.data响应主体---->res.data.data响应主体包含（message,data）
-              // 用户信息  res.data.data
-              // 操作用户信息 就是操作 store 存储  写一个模块进行用户信息的操作。
-              store.setUser(res.data.data)
-              // 如果请求成功就跳转到首页
-              this.$router.push('/')
-            })
-            .catch(() => {
-              this.$message.error('手机号或者验证码不正确')
-            })
+          try {
+            //  res = {data:{data:'用户信息',message:'提示'}}
+            // const data = await this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+            const { data: { data } } = await this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+
+            store.setUser(data)
+            this.$router.push('/')
+          } catch (err) {
+            this.$message.error('手机号或者验证码不正确')
+          }
+
+          // .then(res => {
+          //   // 成功 跳转
+          //   // 注意 登录 不够完善
+          //   // res是响应对象--->res.data响应主体---->res.data.data响应主体包含（message,data）
+          //   // 用户信息  res.data.data
+          //   // 操作用户信息 就是操作 store 存储  写一个模块进行用户信息的操作。
+          //   store.setUser(res.data.data)
+          //   // 如果请求成功就跳转到首页
+          //   this.$router.push('/')
+          // })
+          // .catch(() => {
+          //   this.$message.error('手机号或者验证码不正确')
+          // })
         }
       })
     }
