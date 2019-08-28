@@ -5,9 +5,12 @@ import App from './App.vue'
 
 import router from '@/router'
 import axios from '@/api'
+import myPlugin from '@/components'
+
 Vue.prototype.$http = axios
 
 Vue.use(ElementUI) // 注册ElementUI
+Vue.use(myPlugin)
 
 Vue.config.productionTip = false
 

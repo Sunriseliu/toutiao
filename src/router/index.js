@@ -11,6 +11,7 @@ import Welcome from '@/views/welcome'
 
 import notFound from '@/views/404'
 import store from '@/store'
+import Article from '@/views/article'
 
 Vue.use(VueRouter) // 注册所有的路由组件
 Vue.prototype.$http = axios // 配置axios为vue的原型
@@ -22,7 +23,8 @@ const router = new VueRouter({
       // name: 'home',
       component: Home,
       children: [
-        { path: '/', name: 'welcome', component: Welcome }
+        { path: '/', name: 'welcome', component: Welcome },
+        { path: '/article', name: 'article', component: Article }
       ]
 
     },

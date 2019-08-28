@@ -3,7 +3,7 @@
     <el-aside :width='iszd?"66px":"200px"'>
       <div class="logo" :class="{minilogo:iszd}"></div>
       <el-menu
-        default-active="/"
+        :default-active="$route.path"
         class="el-menu-vertical-demo"
         background-color="#002033"
         text-color="#fff"
