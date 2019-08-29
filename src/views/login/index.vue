@@ -67,7 +67,7 @@ export default {
           try {
             //  res = {data:{data:'用户信息',message:'提示'}}
             // const data = await this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
-            const { data: { data } } = await this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+            const { data: { data } } = await this.$http.post('/authorizations', this.loginForm)
 
             store.setUser(data)
             this.$router.push('/')
