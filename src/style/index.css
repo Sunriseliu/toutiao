@@ -1,0 +1,7 @@
+.avatar-uploader {
+  text-align: center;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #ddd;
+  cursor: pointer;
+}

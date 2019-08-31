@@ -12,11 +12,13 @@ import Welcome from '@/views/welcome'
 import notFound from '@/views/404'
 import store from '@/store'
 import Article from '@/views/article'
+import Images from '@/views/image'
 
 Vue.use(VueRouter) // 注册所有的路由组件
 Vue.prototype.$http = axios // 配置axios为vue的原型
 // 使用实例化router对象
 const router = new VueRouter({
+
   routes: [
     { path: '/login', name: '/login', component: Login },
     { path: '/',
@@ -24,7 +26,8 @@ const router = new VueRouter({
       component: Home,
       children: [
         { path: '/', name: 'welcome', component: Welcome },
-        { path: '/article', name: 'article', component: Article }
+        { path: '/article', name: 'article', component: Article },
+        { path: '/images', name: 'images', component: Images }
       ]
 
     },
