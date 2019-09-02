@@ -13,6 +13,10 @@ import notFound from '@/views/404'
 import store from '@/store'
 import Article from '@/views/article'
 import Images from '@/views/image'
+import Publish from '@/views/publish'
+
+import Comment from '@/views/comment'
+// import Fans from '@/views/fans'
 
 Vue.use(VueRouter) // 注册所有的路由组件
 Vue.prototype.$http = axios // 配置axios为vue的原型
@@ -27,7 +31,10 @@ const router = new VueRouter({
       children: [
         { path: '/', name: 'welcome', component: Welcome },
         { path: '/article', name: 'article', component: Article },
-        { path: '/images', name: 'images', component: Images }
+        { path: '/images', name: 'images', component: Images },
+        { path: '/publish', name: 'publish', component: Publish },
+        { path: '/comment', name: 'comment', component: Comment }
+        // { path: '/fans', name: 'fans', component: Fans }
       ]
 
     },
