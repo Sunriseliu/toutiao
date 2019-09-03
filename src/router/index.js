@@ -16,7 +16,8 @@ import Images from '@/views/image'
 import Publish from '@/views/publish'
 
 import Comment from '@/views/comment'
-// import Fans from '@/views/fans'
+import Setting from '@/views/setting'
+import Fans from '@/views/fans'
 
 Vue.use(VueRouter) // 注册所有的路由组件
 Vue.prototype.$http = axios // 配置axios为vue的原型
@@ -33,8 +34,9 @@ const router = new VueRouter({
         { path: '/article', name: 'article', component: Article },
         { path: '/images', name: 'images', component: Images },
         { path: '/publish', name: 'publish', component: Publish },
-        { path: '/comment', name: 'comment', component: Comment }
-        // { path: '/fans', name: 'fans', component: Fans }
+        { path: '/comment', name: 'comment', component: Comment },
+        { path: '/setting', name: 'setting', component: Setting },
+        { path: '/fans', name: 'fans', component: Fans }
       ]
 
     },
